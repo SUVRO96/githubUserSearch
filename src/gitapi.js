@@ -88,7 +88,6 @@ class Githubapi extends Component {
                   className="btn btn-sm btn-dark m-2"
                 />
               </div>
-              {/* https://www.youtube.com/watch?v=zFOM4MvuKNs */}
             </form>
           </div>
         </div>

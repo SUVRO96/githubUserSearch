@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
-import Githubapi from "./gitapi";
+import Gitnewapi from "./Gitnew";
 
 function App() {
   return (
     <>
       <div>
-        <Githubapi />
+        {/* <Githubapi /> */}
+        <Gitnewapi />
       </div>
     </>
   );

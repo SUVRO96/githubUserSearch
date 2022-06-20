@@ -5,12 +5,21 @@ import { useState, useEffect } from "react";
 function GitnewapiChild(props) {
   const [user, setUser] = useState({});
   const noBio = "Bio not available";
+
+  const callApi = async () => {
+    console.log(props.link);
+    const data = await fetch(props.link, {
+      headers: {
+        Authorization: "token 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",
+      },
+    });
+    const response = await data.json();
+    console.log(response);
+    setUser(response);
+  };
+
   useEffect(() => {
-    return () => {
-      axios.get(props.link).then(response => {
-        setUser(response.data);
-      });
-    };
+    callApi();
   }, []);
 
   return (

@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import GitnewapiChild from "./GitnewChild";
 
-class Gitnewapi extends Component {
+class Githubapi extends Component {
   constructor(props) {
     super(props);
 
@@ -13,7 +12,6 @@ class Gitnewapi extends Component {
       users: null,
     };
   }
-
   handleChange = e => {
     this.setState({
       ...this.state,
@@ -28,24 +26,21 @@ class Gitnewapi extends Component {
   };
 
   searchProfile = () => {
-    fetch(
-      `https://api.github.com/search/users?q=${this.state.username}%20in:name`,
-      {
-        headers: {
-          Authorization: "token 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",
-        },
-      }
-    )
-      .then(data => {
-        return data.json();
-      })
+    axios
+      .get(
+        `https://api.github.com/search/users?q=${this.state.username}%20in:name`
+      )
       .then(response => {
-        // console.log(response);
-        //renderTable
         this.setState({
-          users: response,
+          users: response.data,
         });
+      })
+      .catch(err => {
+        console.log(err);
       });
+    this.setState({
+      username: "",
+    });
   };
 
   render() {
@@ -59,7 +54,7 @@ class Gitnewapi extends Component {
                 width="32"
                 height="32"
                 fill="currentColor"
-                className="bi bi-github"
+                class="bi bi-github"
                 viewBox="0 0 16 16"
               >
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
@@ -98,32 +93,48 @@ class Gitnewapi extends Component {
         </div>
         <div
           className="reult-container row m-3"
-          style={{
-            backgroundColor: "#A5BECC",
-            maxHeight: "500px",
-            overflowY: "auto",
-          }}
+          style={{ backgroundColor: "#A5BECC" }}
         >
           <div>
-            <h5 style={{ margin: "10px" }}>{this.state.searchItem}</h5>
+            <h5>{this.state.searchItem}</h5>
           </div>
-          <div className="row d-flex">
-            {this.state.users !== null && (
-              <>
-                {this.state.users.items.map(user => {
-                  return (
-                    <Fragment key={user.id}>
-                      <GitnewapiChild link={user.url} />
-                    </Fragment>
-                  );
-                })}
-              </>
-            )}
-          </div>
+          {this.state.users !== null && (
+            <>
+              {this.state.users.items.map(user => {
+                return (
+                  <div className="m-3 col mx-auto" key={user.id}>
+                    <div className="card shadow p-3 mb-5 bg-white rounded d-flex flex-row">
+                      <div className="profile-img">
+                        <img
+                          src={user.avatar_url}
+                          style={{ width: "200px", height: "200px" }}
+                        ></img>
+                      </div>
+                      <div className="profile-dtl ms-3 d-flex flex-column">
+                        <div className="profile-name">
+                          <h5>username:</h5>
+                          <h4>{user.login}</h4>
+                        </div>
+                        <hr />
+                        <div className="profile-link">
+                          <h5>Github:</h5>
+                          <a href={user.html_url} target="_blank">
+                            <h6>{user.html_url}</h6>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     );
   }
 }
 
-export default Gitnewapi;
+export default Githubapi;
+
+// https://codepen.io/magnusriga/pen/bKbWjx

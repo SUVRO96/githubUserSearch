@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
 import GitnewapiChild from "./GitnewChild";
 
 class Gitnewapi extends Component {
@@ -32,7 +31,7 @@ class Gitnewapi extends Component {
       `https://api.github.com/search/users?q=${this.state.username}%20in:name`,
       {
         headers: {
-          Authorization: "token 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",
+          Authorization: "token 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",
         },
       }
     )
@@ -41,8 +40,8 @@ class Gitnewapi extends Component {
       })
       .then(response => {
         // console.log(response);
-        //renderTable
         this.setState({
+          ...this.state,
           users: response,
         });
       });

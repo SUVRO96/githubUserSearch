@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -10,7 +9,7 @@ function GitnewapiChild(props) {
     console.log(props.link);
     const data = await fetch(props.link, {
       headers: {
-        Authorization: "token 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",
+        Authorization: "token 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",
       },
     });
     const response = await data.json();
@@ -20,7 +19,7 @@ function GitnewapiChild(props) {
 
   useEffect(() => {
     callApi();
-  }, []);
+  });
 
   return (
     <>
@@ -43,7 +42,7 @@ function GitnewapiChild(props) {
               </h5>
               <h6 className="card-text my-3">
                 <u>Bio:</u>
-                <p className="lead">{user.bio == "" ? noBio : user.bio}</p>
+                <p className="lead">{user.bio === "" ? noBio : user.bio}</p>
               </h6>
               <p className="card-text">
                 Profile:

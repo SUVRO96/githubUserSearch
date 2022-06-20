@@ -6,7 +6,7 @@ function GitnewapiChild(props) {
   const noBio = "Bio not available";
 
   const callApi = async () => {
-    console.log(props.link);
+    // console.log(props.link);
     const data = await fetch(props.link);
     const response = await data.json();
     console.log(response);
@@ -15,7 +15,7 @@ function GitnewapiChild(props) {
 
   useEffect(() => {
     callApi();
-  });
+  }, []);
 
   return (
     <>

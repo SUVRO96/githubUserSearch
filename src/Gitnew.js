@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GitnewapiChild from "./GitnewChild";
+import Skeleton from "react-loading-skeleton";
 
 class Gitnewapi extends Component {
   constructor(props) {
@@ -102,7 +103,7 @@ class Gitnewapi extends Component {
             <h5 style={{ margin: "10px" }}>{this.state.searchItem}</h5>
           </div>
           <div className="row d-flex">
-            {this.state.users !== null && (
+            {this.state.users !== null ? (
               <>
                 {this.state.users.items.map(user => {
                   return (
@@ -112,6 +113,10 @@ class Gitnewapi extends Component {
                   );
                 })}
               </>
+            ) : (
+              <div>
+                <Skeleton height={100} width={300} />
+              </div>
             )}
           </div>
         </div>

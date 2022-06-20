@@ -28,12 +28,7 @@ class Gitnewapi extends Component {
 
   searchProfile = () => {
     fetch(
-      `https://api.github.com/search/users?q=${this.state.username}%20in:name`,
-      {
-        headers: {
-          Authorization: "token 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",
-        },
-      }
+      `https://api.github.com/search/users?q=${this.state.username}%20in:name`
     )
       .then(data => {
         return data.json();

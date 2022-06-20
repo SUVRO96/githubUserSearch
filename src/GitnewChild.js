@@ -7,11 +7,7 @@ function GitnewapiChild(props) {
 
   const callApi = async () => {
     console.log(props.link);
-    const data = await fetch(props.link, {
-      headers: {
-        Authorization: "token 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",
-      },
-    });
+    const data = await fetch(props.link);
     const response = await data.json();
     console.log(response);
     setUser(response);

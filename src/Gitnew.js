@@ -69,7 +69,15 @@ class Gitnewapi extends Component {
                 marginLeft: "0.5rem",
               }}
             >
-              <p>~By Subhradip</p>
+              <p>
+                <a
+                  href="https://github.com/SUVRO96"
+                  target="_blank"
+                  style={{ color: "white" }}
+                >
+                  ~By Subhradip
+                </a>
+              </p>
             </span>
           </div>
           <div className="card-body text-center">

@@ -39,6 +39,7 @@ class Gitnewapi extends Component {
         this.setState({
           ...this.state,
           users: response,
+          username: "",
         });
       });
   };
